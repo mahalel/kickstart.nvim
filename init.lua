@@ -122,6 +122,14 @@ require('lazy').setup({
     },
   },
 
+  {
+    "sourcegraph/sg.nvim",
+    dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope.nvim" },
+
+    -- If you have a recent version of lazy.nvim, you don't need to add this!
+    -- build = "nvim -l build/init.lua",
+  },
+
   -- Useful plugin to show you pending keybinds.
   { 'folke/which-key.nvim',  opts = {} },
   {
@@ -595,6 +603,15 @@ local servers = {
 -- Setup neovim lua configuration
 require('neodev').setup()
 
+-- Sourcegraph configuration. All keys are optional
+require("sg").setup {
+  -- Pass your own custom attach function
+  --    If you do not pass your own attach function, then the following maps are provide:
+  --        - gd -> goto definition
+  --        - gr -> goto references
+  on_attach = on_attach
+}
+
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
@@ -663,6 +680,7 @@ cmp.setup {
     end, { 'i', 's' }),
   },
   sources = {
+    { name = 'cody' },
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
     { name = 'path' },
