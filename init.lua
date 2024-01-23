@@ -51,6 +51,11 @@ vim.g.netrw_winsize = 25
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
+vim.keymap.set(
+  "n",
+  "<leader>ee",
+  "oif err != nil {<CR>}<Esc>Oreturn err<Esc>"
+)
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    https://github.com/folke/lazy.nvim
